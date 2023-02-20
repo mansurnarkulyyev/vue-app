@@ -1,47 +1,45 @@
 <template>
-  <h1>{{ title }}</h1>
-<!-- <Button v-on:click="amountOfClicks += 1">Click me</Button> -->
-<!-- <Button  @click="increment" outlined>Click me</Button>
-<DirectivesTest/> -->
-<StartRating :rating="4"/>
+     <ProductsItem
+      :descr="product.description"
+      :rating="product.rating.rate"
+      :price="product.price"
+      :imgSrc="product.image"
+      />
 </template>
 
 <script>
 
-// import Button from './components/Button.vue'
-// import DirectivesTest from './components/DirectivesTest.vue'
-import StartRating from './components/StarRating.vue'
+import ProductsItem from './components/product/ProductsItem.vue'
 
 export default {
   name: 'App',
   components: {
-    // Button,
-    // DirectivesTest,
-    StartRating
+   ProductsItem,
   },
         // data нужен для того что бы изменятть свой state то есть свое состояние 
-data(){
-  return {
-    amountOfClicks:0
+         data() {
+    return {
+      product: {
+        id: 2,
+        title: "Mens Casual Premium Slim Fit T-Shirts ",
+        price: 22.3,
+        description: "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        category: "men's clothing",
+        image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        rating: {
+          rate: 4.1,
+          count: 259
+        }
+      }
+    }
   }
-},
-computed:{
-  title(){
-    return `Amount of clicks ${this.amountOfClicks}`
-  }
-},
-methods:{
-  increment(){
-    this.amountOfClicks += 1
-  }
-}
 
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Monserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
