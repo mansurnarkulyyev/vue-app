@@ -1,6 +1,6 @@
 <template>
     <div class="products-item">
-<div class="products-item__inner">
+          <div class="products-item__inner">
     <img :src="imgSrc" alt="" class="products-item__photo">
     <div class="products-item__content">
         <p class="products-item__description">
@@ -10,8 +10,9 @@
            <StarRating :rating = "rating"/>
         </div>
         <div class="products-item__price">UAH {{ price }}</div>
+        <a href="https://facebook.com" @click.prevent.stop="handleLinkClick">facebook</a>
     </div>
-</div>
+        </div>
     </div>
 </template>
 
@@ -38,6 +39,14 @@ import StarRating from '../StarRating.vue'
             imgSrc:{
                 type: String,
                 default: ''
+            }
+        },
+        methods:{
+            log(event){
+                console.log(event);
+            },
+            handleLinkClick(){
+                console.log('Facebook clicked')
             }
         }
     }

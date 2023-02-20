@@ -1,43 +1,60 @@
 <template>
-     <ProductsItem
-      :descr="product.description"
-      :rating="product.rating.rate"
-      :price="product.price"
-      :imgSrc="product.image"
-      />
+<h2>{{ text }}</h2>
+<!-- <input type="text" v-model="text" class="custom-input"> -->
+<CustomSelect :items="['name','label', 'salary']"/>
+<CustomInput v-model="text" />
+
+     <ProductsList :items="products">
+
+      <template v-slot:product="{product}">
+        <ProductsItem
+             :key="product.id"
+              :descr="product.description"
+                  :rating="product.rating.rate"
+                  :price="product.price"
+                  :imgSrc="product.image"
+                  @click="handleEventClick"
+             />
+  </template>
+        <!-- пример как передавать слоты через пропс, этот слот забераем с продуктлист -->
+     <!-- <template v-slot:description>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores earum voluptates possimus doloremque quisquam ad non. Nam excepturi debitis quisquam aspernatur sunt laboriosam quia dolorem aut impedit inventore, quibusdam quidem.</template> -->
+     </ProductsList>
 </template>
 
 <script>
 
+import ProductsList from './components/product/ProductsList.vue'
+import products from './components/product/products'
 import ProductsItem from './components/product/ProductsItem.vue'
+import CustomInput from './components/shared/CustomInput.vue'
+import CustomSelect from './components/shared/CustomSelect.vue'
 
 export default {
   name: 'App',
   components: {
+   ProductsList,
    ProductsItem,
+   CustomInput,
+   CustomSelect,
   },
         // data нужен для того что бы изменятть свой state то есть свое состояние 
-         data() {
+   data() {
     return {
-      product: {
-        id: 2,
-        title: "Mens Casual Premium Slim Fit T-Shirts ",
-        price: 22.3,
-        description: "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-        category: "men's clothing",
-        image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-        rating: {
-          rate: 4.1,
-          count: 259
-        }
-      }
+      text: '',
+      products,
+    }
+  },
+  methods:{
+    handleEventClick(){
+      console.log("HandleEventClicked")
     }
   }
 
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 #app {
   font-family: Monserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,4 +63,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+
 </style>
