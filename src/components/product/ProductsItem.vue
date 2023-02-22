@@ -10,7 +10,11 @@
            <StarRating :rating = "rating"/>
         </div>
         <div class="products-item__price">UAH {{ price }}</div>
-        <a href="https://facebook.com" @click.prevent.stop="handleLinkClick">facebook</a>
+        <router-link
+        class="product-item__link"
+        
+           :to="{ name: 'product', params: { id }, query: { name: 'John' } }"
+        >Click me</router-link>
     </div>
         </div>
     </div>
@@ -24,6 +28,10 @@ import StarRating from '../StarRating.vue'
             StarRating
         },
         props:{
+          id:{
+            type:String,
+            required:true
+          },
             descr:{
                type:String,
                default:''
