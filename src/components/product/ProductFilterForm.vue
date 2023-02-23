@@ -1,9 +1,13 @@
 <template>
     <form class="form" @submit.prevent="handleSubmit">
     <CustomSelect :items="cities" v-model="city"  class="form__select"/>
-    <CustomInput  class="form__submit" v-model="price"
+    <CustomInput  class="form__submit" 
+
+    v-model="price"
+
           placeholder="Цена, от"
           error-message="Не должно быть пустым"
+          :rules="rules"
           />
 
     <SubmitButton class="form__submit" type="submit">
@@ -16,7 +20,7 @@
 import CustomInput from '../shared/CustomInput.vue'
 import CustomSelect from '../shared/CustomSelect.vue'
 import SubmitButton from '../shared/Button';
-// import { isRequired, charLimit } from '../../utils/validationRules';
+import { isRequired, charLimit } from '../../utils/validationRules';
 
     export default {
     components: {
@@ -32,9 +36,9 @@ import SubmitButton from '../shared/Button';
     },
     inheritAttrs: false,
     computed: {
-        // rules() {
-        //     return [isRequired, charLimit(10)];
-        // },
+        rules() {
+            return [isRequired, charLimit(10)];
+        },
         cities() {
             return [
                 { value: '', label: 'Город', selected: true },
