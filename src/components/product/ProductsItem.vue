@@ -29,7 +29,7 @@ import StarRating from '../StarRating.vue'
         },
         props:{
           id:{
-            type:String,
+            type:Number,
             required:true
           },
             descr:{

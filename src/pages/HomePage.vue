@@ -2,7 +2,7 @@
     <main class="homepage">
        
         <Container>
-                <ProductFilterForm @submit="filter"  class="products-filter"/>
+                <ProductFilterForm @submit="filter" :filters="filters" class="products-filter"/>
             </Container>
             <Container>
                 <p v-if="!filteredProducts.length">Ничего не найдено</p>
@@ -29,10 +29,11 @@
 <script>
 
 import ProductsList from '../components/product/ProductsList.vue'
-import products from '../components/product/products'
+// import products from '../components/product/products'
 import ProductsItem from '../components/product/ProductsItem.vue'
 import Container from '../components/shared/Container.vue'
 import ProductFilterForm from '../components/product/ProductFilterForm.vue'
+import { getProductList } from '@/services/products-service'
 
 
 export default {
@@ -47,7 +48,7 @@ export default {
     data() {
         return {
             text: '',
-            products,
+            products:[],
             filters: {
                 city: '',
                 price: 0
@@ -58,6 +59,16 @@ export default {
     computed: {
         filteredProducts() {
             return this.filterByCityName(this.filterByPrice(this.products))
+        }
+    },
+
+    async created(){
+        try{
+            const {data } = await getProductList();
+            this.products = data;
+
+        }catch(error){
+            console.error(error);
         }
     },
 

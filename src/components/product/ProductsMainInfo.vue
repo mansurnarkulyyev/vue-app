@@ -17,7 +17,6 @@
 <script>
 import Rating from '../StarRating';
 import Button from '../shared/Button';
-// import { bookProduct } from '../../services/order.service';
 export default {
     name: 'P roductsMainInfo',
     components: {
